@@ -1,0 +1,556 @@
+# Listed football clubs in the study universe.
+#
+# football_data_name: exact spelling in football-data.co.uk files.
+# betfair_names: exact team spellings used in Betfair event names ("Home v Away").
+# openfootball_names: spellings in the openfootball European fixture files (country tag removed).
+# oddsportal_names: spellings on OddsPortal (data/raw/oddsportal), verified on the scraped files 2026-10-06.
+# wikipedia_name: the club as in English Wikipedia season article titles ("2016–17 FC Porto season").
+# ticker, exchange, benchmark: Yahoo Finance ticker of the club's listed company, its exchange (exchanges below)
+# and the local index used as benchmark (Step 3). STOXX Europe 600 (^STOXX) is the robustness benchmark.
+# oddsportal_id: the team id in OddsPortal match links (h2h/<slug>-<id>/...), used to pick the clubs' matches
+# out of competition link lists.
+# football_data_name verified against the raw files on 2026-10-05. The first betfair_names entry of
+# every club verified against real Betfair Basic files on 2026-10-06 (exact match on the team
+# name). Step 1 and Step 1b print warnings with close matches when a name is never found.
+# Fix names here, never in code.
+
+seasons:
+  first: "1213"   # Man Utd NYSE listing, August 2012
+  last: "2526"    # last complete season
+
+# Matches per team in a normal season. Step 1 warns about any league season that differs
+# and has no entry in season_notes.
+league_matches_per_team:
+  D1: 34
+  E0: 38
+  F1: 38
+  I1: 38
+  N1: 34
+  P1: 34
+  SC0: 38
+  T1: 34
+
+# League names, used as the competition of league rows in match_expectations_all.csv.
+league_names:
+  D1: Bundesliga
+  E0: Premier League
+  F1: Ligue 1
+  I1: Serie A
+  N1: Eredivisie
+  P1: Primeira Liga
+  SC0: Scottish Premiership
+  T1: Super Lig
+
+# Display names for non-league competitions. Keys are OddsPortal listing paths (football/<country>/<slug>,
+# season suffix removed; sponsor names map to one competition) and the super_cups keys below.
+competition_names:
+  football/europe/champions-league: Champions League
+  champions-league: Champions League
+  football/europe/europa-league: Europa League
+  football/europe/uefa-super-cup: UEFA Super Cup
+  football/europe/conference-league: Conference League
+  football/world/fifa-club-world-cup: FIFA Club World Cup
+  football/england/fa-cup: FA Cup
+  football/england/capital-one-cup: EFL Cup
+  football/england/efl-cup: EFL Cup
+  football/england/fa-community-shield: Community Shield
+  football/italy/coppa-italia: Coppa Italia
+  football/italy/super-cup: Supercoppa Italiana
+  football/germany/dfb-pokal: DFB-Pokal
+  football/germany/super-cup: DFL-Supercup
+  football/netherlands/knvb-beker: KNVB Beker
+  football/netherlands/super-cup: Johan Cruijff Schaal
+  football/netherlands/johan-cruyff-shield: Johan Cruijff Schaal
+  football/scotland/scottish-cup: Scottish Cup
+  football/scotland/insurance-league-cup: Scottish League Cup
+  football/scotland/league-cup: Scottish League Cup
+  football/portugal/taca-de-portugal: Taca de Portugal
+  football/portugal/league-cup: Taca da Liga
+  football/portugal/super-cup: Supertaca
+  football/france/coupe-de-france: Coupe de France
+  football/france/coupe-de-la-ligue: Coupe de la Ligue
+  football/france/super-cup: Trophee des Champions
+  football/turkey/turkish-cup: Turkish Cup
+  football/turkey/super-cup: Turkish Super Cup
+  dfl_supercup: DFL-Supercup
+  supertaca: Supertaca
+  turkish_super_cup: Turkish Super Cup
+  johan_cruijff_schaal: Johan Cruijff Schaal
+  community_shield: Community Shield
+  trophee_des_champions: Trophee des Champions
+  supercoppa_italiana: Supercoppa Italiana
+  # Wikipedia season article section headings (src/wikipedia_fixtures.py)
+  UEFA Champions League: Champions League
+  UEFA Europa League: Europa League
+  UEFA Europa Conference League: Conference League
+  UEFA Conference League: Conference League
+  UEFA Super Cup: UEFA Super Cup
+  FIFA Club World Cup: FIFA Club World Cup
+  FA Cup: FA Cup
+  League Cup: EFL Cup
+  EFL Cup: EFL Cup
+  Football League Cup: EFL Cup
+  FA Community Shield: Community Shield
+  Coppa Italia: Coppa Italia
+  DFB-Pokal: DFB-Pokal
+  KNVB Cup: KNVB Beker
+  Johan Cruyff Shield: Johan Cruijff Schaal
+  Eredivisie European competition play-offs: Eredivisie play-offs
+  Scottish Cup: Scottish Cup
+  Scottish League Cup: Scottish League Cup
+  Taça de Portugal: Taca de Portugal
+  Taça da Liga: Taca da Liga
+  Supertaça Cândido de Oliveira: Supertaca
+  Coupe de France: Coupe de France
+  Coupe de la Ligue: Coupe de la Ligue
+  Trophée des Champions: Trophee des Champions
+  Turkish Cup: Turkish Cup
+  Türkiye Kupası: Turkish Cup
+  Turkish Super Cup: Turkish Super Cup
+
+# League seasons with a non-standard number of matches per team, and why. Counts are from
+# the raw files. Kept so the report can explain short and long seasons.
+season_notes:
+  - {league: N1, season: "1920", matches_per_team: "25-26", reason: "Eredivisie abandoned April 2020 (Covid)"}
+  - {league: F1, season: "1920", matches_per_team: "27-28", reason: "Ligue 1 abandoned April 2020 (Covid)"}
+  - {league: SC0, season: "1920", matches_per_team: "29-30", reason: "Scottish Premiership ended early May 2020 (Covid), before the split"}
+  - {league: P1, season: "1213", matches_per_team: "30", reason: "Primeira Liga had 16 teams (18 from 2014/15)"}
+  - {league: P1, season: "1314", matches_per_team: "30", reason: "Primeira Liga had 16 teams (18 from 2014/15)"}
+  - {league: F1, season: "2324", matches_per_team: "34", reason: "Ligue 1 cut to 18 teams"}
+  - {league: F1, season: "2425", matches_per_team: "34", reason: "Ligue 1 cut to 18 teams"}
+  - {league: F1, season: "2526", matches_per_team: "34", reason: "Ligue 1 cut to 18 teams"}
+  - {league: T1, season: "2021", matches_per_team: "40", reason: "Super Lig expanded to 21 teams (no relegation in Covid hit 2019/20)"}
+  - {league: T1, season: "2122", matches_per_team: "38", reason: "Super Lig had 20 teams"}
+  - {league: T1, season: "2223", matches_per_team: "36", reason: "Super Lig had 19 teams; Gaziantep and Hatayspor withdrew after the earthquake (see excluded_matches)"}
+  - {league: T1, season: "2324", matches_per_team: "38", reason: "Super Lig had 20 teams"}
+  - {league: T1, season: "2425", matches_per_team: "36", reason: "Super Lig had 19 teams"}
+
+# Matches dropped before computing expectations. Awarded results that were never played,
+# so there is no market expectation and no real result.
+excluded_matches:
+  - {league: T1, season: "2223", date: "05/03/2023", home: Gaziantep, away: Galatasaray, reason: "forfeit: Gaziantep withdrew after the February 2023 earthquake, awarded 0-3"}
+  - {league: T1, season: "2223", date: "19/04/2023", home: Besiktas, away: Hatayspor, reason: "forfeit: Hatayspor withdrew after the February 2023 earthquake, awarded 3-0"}
+  - {league: T1, season: "2223", date: "17/05/2023", home: Besiktas, away: Gaziantep, reason: "forfeit: Gaziantep withdrew after the February 2023 earthquake, awarded 3-0"}
+  - {league: T1, season: "2223", date: "21/05/2023", home: Hatayspor, away: Fenerbahce, reason: "forfeit: Hatayspor withdrew after the February 2023 earthquake, awarded 0-3"}
+  - {league: T1, season: "2223", date: "07/06/2023", home: Fenerbahce, away: Gaziantep, reason: "forfeit: Gaziantep withdrew after the February 2023 earthquake, awarded 3-0"}
+  - {league: T1, season: "2223", date: "07/06/2023", home: Hatayspor, away: Galatasaray, reason: "forfeit: Hatayspor withdrew after the February 2023 earthquake, awarded 0-3"}
+
+# Step 1b gap fill: 90 minute results for OddsPortal matches whose page has no half-time scores
+# (OddsPortal's final score includes extra time, which does not settle 1X2 bets).
+oddsportal_results_90:
+  - {date: "16/03/2016", home: Bayern Munich, away: Juventus, result_hda: D, reason: "2-2 after 90 minutes, 4-2 after extra time"}
+  # Second legs that went to extra time, 2012/13 to 2014/15 (results checked on Wikipedia 2026-10-07)
+  - {date: "21/02/2013", home: FCSB, away: Ajax, result_hda: H, reason: "2-0 after 90 minutes and extra time, Steaua won on penalties"}
+  - {date: "08/05/2013", home: Fenerbahce, away: Eskisehirspor, result_hda: D, reason: "1-1 after 90 minutes and extra time, Fenerbahce won on penalties"}
+  - {date: "22/01/2014", home: Manchester Utd, away: Sunderland, result_hda: H, reason: "1-0 after 90 minutes, 2-1 after extra time, Sunderland won on penalties"}
+  - {date: "26/02/2015", home: Besiktas, away: Liverpool, result_hda: H, reason: "1-0 after 90 minutes and extra time, Besiktas won on penalties"}
+  - {date: "19/03/2015", home: Ajax, away: Dnipro, result_hda: H, reason: "1-0 after 90 minutes, 2-1 after extra time, Dnipro through on away goals"}
+  # Second leg whose first leg is a Betfair match (the loader only sees OddsPortal first legs); Wikipedia, 2026-10-08
+  - {date: "18/04/2018", home: Sporting CP, away: FC Porto, result_hda: H, reason: "1-0 after 90 minutes and extra time, Sporting won 5-4 on penalties"}
+
+# Step 1b friendly filter. Betfair Basic files do not name the competition, so a Betfair match
+# that is neither a Step 1 league match nor in the openfootball European fixture list is treated
+# as a friendly if it falls in the club's off-season (from off_season_buffer_days after its last
+# league match of a season to its first league match of the next) or winter break (a gap of at
+# least winter_break_min_days between league matches that overlaps mid December to mid February).
+# Clubs under date_rule_exempt, and dates under date_rule_exempt_periods, keep those matches.
+friendly_filter:
+  winter_break_min_days: 18
+  off_season_buffer_days: 14   # keeps cup finals just after the league ends (July 2020 Covid finals)
+  two_leg_max_days: 14         # same opponent home and away within this many days: a qualifier, kept
+  # In a winter break, a match against a team from the club's own league is a cup tie and kept,
+  # except in these leagues, whose clubs play domestic sides at winter training camps.
+  winter_camp_friendly_leagues: [D1, N1]
+  # No exempt periods: the 2025 FIFA Club World Cup matches are named from OddsPortal and Wikipedia,
+  # so the date rules no longer reach them (the exemption, removed 2026-10-08, only kept friendlies).
+  date_rule_exempt_periods: []
+  date_rule_exempt:
+    - {club: Celtic, reason: "Champions League and Europa League qualifiers start in July, before the Scottish season; openfootball only lists qualifiers from 2024/25"}
+
+# Domestic super cups: single competitive matches, usually just before the season, which the
+# off-season rule would otherwise drop. Dates supplied by Jordan (2026-10-06). A Betfair row is
+# kept as a super cup only if the club plays in that league, the date matches exactly (London
+# date; a day's tolerance mislabelled January Coppa Italia ties), and the
+# opponent is a team the club also meets in the league. Known false positives go under exclude.
+# 2015 editions and Supercoppa Italiana added 2026-10-06. null = no date (cancelled or not yet set).
+super_cups:
+  dfl_supercup:
+    league: D1
+    dates:
+      2015: 2015-08-01
+      2016: 2016-08-14
+      2017: 2017-08-05
+      2018: 2018-08-12
+      2019: 2019-08-03
+      2020: 2020-09-30       # mid season (Covid)
+      2021: 2021-08-17
+      2022: 2022-07-30
+      2023: 2023-08-12
+      2024: 2024-08-17
+      2025: 2025-08-16
+      2026: 2026-08-22
+  supertaca:
+    league: P1
+    dates:
+      2015: 2015-08-09
+      2016: 2016-08-07
+      2017: 2017-08-05
+      2018: 2018-08-04
+      2019: 2019-08-04
+      2020: 2020-12-23       # mid season
+      2021: 2021-07-31
+      2022: 2022-07-30
+      2023: 2023-08-09
+      2024: 2024-08-03
+      2025: 2025-07-31
+      2026: 2026-08-01
+  turkish_super_cup:
+    league: T1
+    dates:
+      2015: 2015-08-08
+      2016: 2016-08-13
+      2017: 2017-08-06
+      2018: 2018-08-05
+      2019: 2019-08-07
+      2020: 2021-01-27       # mid season
+      2021: 2022-01-05       # mid season, Qatar
+      2022: 2022-07-30
+      2023: 2024-04-07       # replayed after the abandoned Riyadh match of 29/12/2023
+      2024: 2024-08-03
+      2025: [2026-01-05, 2026-01-06, 2026-01-10]   # four team format: two semis + final
+  johan_cruijff_schaal:
+    league: N1
+    dates:
+      2015: 2015-08-02
+      2016: 2016-07-31
+      2017: 2017-08-05
+      2018: 2018-08-04
+      2019: 2019-07-27
+      2020: null             # cancelled (Covid)
+      2021: 2021-08-07
+      2022: 2022-07-30
+      2023: 2023-07-30
+      2024: 2024-08-04
+      2025: 2025-08-03
+      2026: 2026-08-02
+  community_shield:
+    league: E0
+    dates:
+      2015: 2015-08-02
+      2016: 2016-08-07
+      2017: 2017-08-06
+      2018: 2018-08-05
+      2019: 2019-08-04
+      2020: 2020-08-29
+      2021: 2021-08-07
+      2022: 2022-07-30
+      2023: 2023-08-06
+      2024: 2024-08-10
+      2025: 2025-08-10
+      2026: 2026-08-16
+    exclude:   # same-day friendlies against a league opponent, not the super cup
+      - {club: Manchester United, date: 2021-08-07, reason: "friendly v Everton; the 2021 Community Shield was Leicester v Man City"}
+  trophee_des_champions:
+    league: F1
+    dates:
+      2015: 2015-08-01       # Montreal
+      2016: 2016-08-06
+      2017: 2017-07-29
+      2018: 2018-08-04
+      2019: 2019-08-03
+      2020: 2021-01-13       # mid season
+      2021: 2021-08-01
+      2022: 2022-07-31
+      2023: 2024-01-03       # mid season
+      2024: 2025-01-05       # mid season, Doha
+      2025: 2026-01-08       # mid season, Kuwait
+      2026: 2026-08-16
+  supercoppa_italiana:
+    league: I1
+    dates:
+      2015: 2015-08-08       # Shanghai; Juventus v Lazio
+      2016: 2016-12-23       # mid season, Doha; Juventus v Milan
+      2017: 2017-08-13       # Rome; Juventus v Lazio
+      2018: 2019-01-16       # mid season, Jeddah; Juventus v Milan
+      2019: 2019-12-22       # mid season, Riyadh; Juventus v Lazio
+      2020: 2021-01-20       # mid season, Reggio Emilia; Juventus v Napoli
+      2021: 2022-01-12       # mid season, Milan; Inter v Juventus
+      2022: 2023-01-18       # mid season, Riyadh; Milan v Inter (no listed club)
+      2023:                  # four team format, Riyadh
+        - 2024-01-18         # semi: Napoli v Fiorentina (no listed club)
+        - 2024-01-19         # semi: Inter v Lazio
+        - 2024-01-22         # final: Napoli v Inter (no listed club)
+      2024:
+        - 2025-01-02         # semi: Inter v Atalanta (no listed club)
+        - 2025-01-03         # semi: Juventus v Milan
+        - 2025-01-06         # final: Inter v Milan (no listed club)
+      2025:
+        - 2025-12-18         # semi: Napoli v Milan (no listed club)
+        - 2025-12-19         # semi: Bologna v Inter (no listed club)
+        - 2025-12-22         # final: Napoli v Bologna (no listed club)
+      2026: null             # back to two teams: Inter v Lazio, date not yet confirmed
+
+# Step 3: exchanges. Close is the end of continuous trading in local time; a match that ends
+# before it affects that day's close. close_times lists changes with the date they took effect.
+# Istanbul's history is to verify; matches ending within an hour of the close are flagged.
+robustness_benchmark: "^STOXX"
+exchanges:
+  NYSE:  {timezone: America/New_York, close_times: [{from: "2000-01-01", close: "16:00"}]}
+  MIL:   {timezone: Europe/Rome, close_times: [{from: "2000-01-01", close: "17:30"}]}
+  XETRA: {timezone: Europe/Berlin, close_times: [{from: "2000-01-01", close: "17:30"}]}
+  AMS:   {timezone: Europe/Amsterdam, close_times: [{from: "2000-01-01", close: "17:30"}]}
+  PAR:   {timezone: Europe/Paris, close_times: [{from: "2000-01-01", close: "17:30"}]}
+  LIS:   {timezone: Europe/Lisbon, close_times: [{from: "2000-01-01", close: "16:30"}]}
+  LSE:   {timezone: Europe/London, close_times: [{from: "2000-01-01", close: "16:30"}]}
+  IST:   {timezone: Europe/Istanbul, close_times: [{from: "2000-01-01", close: "17:30"}, {from: "2015-11-30", close: "18:00"}]}
+
+# Step 3: corporate actions Yahoo Finance gets wrong. Bloomberg CACS (retrieved 2026-10-08) shows
+# paid rights issues of the Turkish clubs. Yahoo applies each adjustment on the wrong date (`date`,
+# about a week before the ex-date) and only to later prices, which leaves one fake crash. Prices
+# before `date` are multiplied by Bloomberg's adjustment factor; with it the return on `date`
+# comes out small (-5.9% to +4.0%), so Yahoo used the same factor and the return is kept. An entry
+# without a factor would have prices before divided by the jump and that day's return excluded.
+corporate_actions:
+  - {ticker: BJKAS.IS, date: "2024-07-03", ex_date: "2024-07-03", factor: 0.223881, reason: "rights issue 400 per 100 at TRY 1 (Bloomberg CACS 237825303)"}
+  - {ticker: BJKAS.IS, date: "2025-04-07", ex_date: "2025-04-16", factor: 0.740541, reason: "rights issue 400 per 100 at TRY 2 (Bloomberg CACS 241709291)"}
+  - {ticker: FENER.IS, date: "2024-12-09", ex_date: "2024-12-17", factor: 0.430243, reason: "rights issue 152.58 per 100 at TRY 6 (Bloomberg CACS 240506333)"}
+  - {ticker: FENER.IS, date: "2025-06-23", ex_date: "2025-06-30", factor: 0.216488, reason: "rights issue 400 per 100 at TRY 1 (Bloomberg CACS 242621727)"}
+  - {ticker: FENER.IS, date: "2025-12-29", ex_date: "2026-01-05", factor: 0.37094, reason: "rights issue 400 per 100 at TRY 2 (Bloomberg CACS 244903404)"}
+  - {ticker: GSRAY.IS, date: "2024-12-23", ex_date: "2024-12-30", factor: 0.326984, reason: "rights issue 400 per 100 at TRY 1 (Bloomberg CACS 240647684)"}
+  - {ticker: GSRAY.IS, date: "2025-06-30", ex_date: "2025-07-07", factor: 0.752941, reason: "rights issue 150 per 100 at TRY 1 (Bloomberg CACS 242705762)"}
+  # Juventus and Roma (Bloomberg CACS, 2026-10-08). JUVE 29/11/2021 (9 per 10 at EUR 0.334, factor
+  # 0.801704, CACS 228500564) is adjusted correctly by Yahoo (no jump), so it is not listed. Lyon:
+  # no rights issues in CACS 2011-2026.
+  - {ticker: JUVE.MI, date: "2024-03-04", ex_date: "2024-03-11", factor: 0.853664, reason: "rights issue 1 per 2 at EUR 1.582 (Bloomberg CACS 237549327); Yahoo's -14.5% becomes +0.1% (market -0.1%)"}
+  - {ticker: "ASR EU Equity", date: "2014-06-30", ex_date: "2014-06-30", factor: null, reason: "rights issue 2 per 1 at EUR 0.377, factor 0.595138 (Bloomberg CACS 92970997). Bloomberg's own series is adjusted but shows +30% on the ex-date, so the adjustment may be misplaced; the day's return is excluded (off-season, no match nearby)"}
+
+# Step 4 split E1 (stakes), src/league_tables.py. A league match is late if it is one of the club's
+# last `last_rounds` scheduled league matches, and has stakes if, on the morning of the match, the
+# club is within `within_points` of the title line, the last Champions League place or the first
+# relegation place. Places per league and season come from the Wikipedia final tables
+# (data/raw/wikipedia_leagues/), ex ante: any Champions League round counts, relegation play-off
+# places count, European Performance Spots (known only late in the season) do not. Decided with
+# Jordan 2026-10-09; the Scottish split is ignored (places across the split line still count).
+e1_stakes:
+  last_rounds: 10
+  within_points: 6
+  # Extra Champions League place from UEFA's European Performance Spot (footnotes of the articles).
+  european_performance_spots:
+    - {league: D1, season: "2324", reason: "Germany one of the two best associations in 2023-24"}
+    - {league: I1, season: "2324", reason: "Italy one of the two best associations in 2023-24"}
+    - {league: E0, season: "2425", reason: "England one of the two best associations in 2024-25"}
+    - {league: E0, season: "2526", reason: "England one of the two best associations in 2025-26"}
+  # Ex ante places where the Wikipedia table shows something else.
+  place_overrides:
+    - {league: T1, season: "1314", last_cl: 2, reason: "champions Fenerbahce banned by UEFA, so 1st shows no CL note; two CL places by coefficient"}
+    - {league: T1, season: "1920", last_cl: 2, reason: "2nd Trabzonspor banned by UEFA; two CL places by coefficient"}
+    - {league: I1, season: "2223", first_rel: 18, reason: "17th and 18th level on points played a tie-breaker (Spezia v Verona); 18th was the first relegation place"}
+    - {league: F1, season: "1920", first_rel: 18, reason: "abandoned (Covid), 2 relegated and no play-off; the play-off place (18th) was scheduled"}
+    - {league: SC0, season: "1920", first_rel: 11, reason: "ended early (Covid), no play-off; the play-off place (11th) was scheduled"}
+    - {league: P1, season: "1920", first_rel: 17, reason: "Setubal (16th) and Aves (18th) relegated on licences, Portimonense (17th) stayed up; 2 sporting relegation places were scheduled"}
+  # Point deductions, counted in the table from `date` (the decision). They add up to Wikipedia's
+  # points minus 3·W + D per club (checked in the code). Names as in football-data.
+  deductions:
+    - {league: E0, season: "2324", team: Everton, date: "2023-11-17", points: -10, reason: "PSR breach (Premier League statement)"}
+    - {league: E0, season: "2324", team: Everton, date: "2024-02-26", points: 4, reason: "appeal cut the deduction to 6 (BBC)"}
+    - {league: E0, season: "2324", team: Everton, date: "2024-04-08", points: -2, reason: "second PSR breach (Sky Sports)"}
+    - {league: E0, season: "2324", team: "Nott'm Forest", date: "2024-03-18", points: -4, reason: "PSR breach (Guardian)"}
+    - {league: F1, season: "1213", team: Ajaccio, date: "2012-08-09", points: -2, reason: "crowd trouble in 2011-12 v Lyon (LFP, Eurosport)"}
+    - {league: F1, season: "2122", team: Nice, date: "2021-09-08", points: -1, reason: "Nice v Marseille abandoned, crowd trouble (LFP, 2 points with 1 suspended)"}
+    - {league: F1, season: "2122", team: Lyon, date: "2021-12-08", points: -1, reason: "Lyon v Marseille abandoned, crowd trouble (BBC)"}
+    - {league: F1, season: "2324", team: Montpellier, date: "2023-10-25", points: -1, reason: "Montpellier v Clermont abandoned, firecracker (LFP, 2 points with 1 suspended)"}
+    - {league: I1, season: "1213", team: Sampdoria, date: "2012-08-01", points: -1, reason: "2011-12 betting scandal, decided before the season"}
+    - {league: I1, season: "1213", team: Torino, date: "2012-08-01", points: -1, reason: "2011-12 betting scandal, decided before the season"}
+    - {league: I1, season: "1213", team: Atalanta, date: "2012-08-01", points: -2, reason: "2011-12 betting scandal, decided before the season"}
+    - {league: I1, season: "1213", team: Siena, date: "2012-08-01", points: -6, reason: "2011-12 betting scandal, decided before the season"}
+    - {league: I1, season: "1415", team: Parma, date: "2014-12-09", points: -1, reason: "unpaid wages (FIGC)"}
+    - {league: I1, season: "1415", team: Parma, date: "2015-03-13", points: -2, reason: "unpaid wages (FIGC)"}
+    - {league: I1, season: "1415", team: Parma, date: "2015-04-16", points: -4, reason: "unpaid wages (FIGC)"}
+    - {league: I1, season: "1819", team: Chievo, date: "2018-09-13", points: -3, reason: "false accounting (Football Italia)"}
+    - {league: I1, season: "2223", team: Juventus, date: "2023-01-20", points: -15, reason: "capital gains case, first ruling"}
+    - {league: I1, season: "2223", team: Juventus, date: "2023-04-20", points: 15, reason: "first ruling annulled by CONI, sent back for a new hearing"}
+    - {league: I1, season: "2223", team: Juventus, date: "2023-05-22", points: -10, reason: "capital gains case, new hearing (FIGC, BBC)"}
+    - {league: N1, season: "1415", team: Twente, date: "2015-03-05", points: -3, reason: "KNVB licensing, financial plan"}
+    - {league: N1, season: "1415", team: Twente, date: "2015-04-10", points: -3, reason: "KNVB licensing, financial plan (NL Times)"}
+    - {league: N1, season: "1516", team: Twente, date: "2016-04-04", points: -3, reason: "KNVB licensing, financial plan (NOS)"}
+    - {league: N1, season: "2324", team: Vitesse, date: "2024-04-19", points: -18, reason: "KNVB licensing"}
+    - {league: SC0, season: "1314", team: Hearts, date: "2013-07-01", points: -15, reason: "administration, before the season"}
+    - {league: SC0, season: "1516", team: Dundee United, date: "2016-05-11", points: -3, reason: "ineligible player v Inverness, 6 May 2016 (BBC)"}
+    - {league: T1, season: "2223", team: Kayserispor, date: "2022-12-23", points: -3, reason: "TFF licensing, appeal rejected 23 Dec 2022 (RSSSF misses it)"}
+    - {league: T1, season: "2324", team: Kayserispor, date: "2023-11-30", points: -3, reason: "TFF licensing"}
+    - {league: T1, season: "2324", team: Istanbulspor, date: "2023-12-19", points: -3, reason: "walked off v Trabzonspor; date of the match, the decision came later (exact date not found)"}
+    - {league: T1, season: "2425", team: Ad. Demirspor, date: "2024-12-06", points: -3, reason: "TFF licensing"}
+    - {league: T1, season: "2425", team: Ad. Demirspor, date: "2025-02-09", points: -3, reason: "walked off at Galatasaray; date of the match, the decision came later"}
+    - {league: T1, season: "2425", team: Ad. Demirspor, date: "2025-03-01", points: -6, reason: "FIFA, unpaid fees; date not found. Last all season, so no effect on the E1 lines"}
+  # Deductions in the Wikipedia tables that did not happen (RSSSF: Lazio 72 points in 2017-18, 59 in
+  # 2018-19, no deduction; the tables' W-D-L match football-data). Checked 2026-10-09.
+  wikipedia_errors:
+    - {league: I1, season: "1718", team: Lazio, points: -1}
+    - {league: I1, season: "1819", team: Lazio, points: -2}
+  # Matches awarded after they were played: football-data has the score on the pitch. The awarded
+  # result counts in the table from `decided`. points_home/away given where the award is not a score.
+  awarded:
+    - {league: F1, season: "1314", date: "2013-08-10", home: Nantes, away: Bastia, hg: 0, ag: 0, points_home: 0, points_away: 3, decided: "2014-02-12", reason: "Nantes fielded a suspended player (LFP: lost by penalty, no goals)"}
+    - {league: I1, season: "2021", date: "2020-09-19", home: Verona, away: Roma, hg: 3, ag: 0, decided: "2020-09-22", reason: "Roma fielded Diawara, not registered (giudice sportivo, 0-0 on the pitch)"}
+  # Differences in goals only between football-data and Wikipedia, left as they are (no effect on points).
+  goal_differences:
+    - {league: F1, season: "1617", teams: [Bastia, Lyon], reason: "Bastia v Lyon abandoned and awarded to Lyon; football-data 0-3, Wikipedia no goals"}
+    - {league: P1, season: "1920", teams: [Gil Vicente, Pacos Ferreira], reason: "Gil Vicente v Pacos Ferreira: football-data 3-3, Wikipedia 2-2"}
+    - {league: T1, season: "1617", teams: [Kasimpasa, Adanaspor], reason: "one goal in Adanaspor v Kasimpasa or the reverse fixture"}
+    - {league: T1, season: "1819", teams: [Besiktas, Akhisar Belediyespor], reason: "one goal in one of the two matches"}
+
+clubs:
+  - club: Manchester United
+    league: E0
+    football_data_name: Man United
+    betfair_names: [Man Utd]
+    openfootball_names: [Manchester United, Manchester United FC]
+    oddsportal_names: [Manchester Utd]
+    oddsportal_id: ppjDR086
+    wikipedia_name: "Manchester United F.C."
+    ticker: MANU
+    exchange: NYSE
+    benchmark: "^GSPC"
+  - club: Juventus
+    league: I1
+    football_data_name: Juventus
+    betfair_names: [Juventus]
+    openfootball_names: [Juventus, Juventus FC]
+    oddsportal_names: [Juventus]
+    oddsportal_id: C06aJvIB
+    wikipedia_name: "Juventus FC"
+    ticker: JUVE.MI
+    exchange: MIL
+    benchmark: "FTSEMIB.MI"
+  - club: Lazio
+    league: I1
+    football_data_name: Lazio
+    betfair_names: [Lazio]
+    openfootball_names: [SS Lazio, Lazio Roma]
+    oddsportal_names: [Lazio]
+    oddsportal_id: URcSl02h
+    wikipedia_name: "SS Lazio"
+    ticker: SSL.MI
+    exchange: MIL
+    benchmark: "FTSEMIB.MI"
+  - club: Roma
+    league: I1
+    football_data_name: Roma
+    betfair_names: [Roma, AS Roma]
+    openfootball_names: [AS Roma]
+    oddsportal_names: [AS Roma]
+    oddsportal_id: zVqqL0ma
+    wikipedia_name: "AS Roma"
+    ticker: "ASR EU Equity"   # Bloomberg (FIGI BBG000MHXQF7, ISIN IT0001008876); delisted from Borsa Italiana, last trading day 12/09/2022; Yahoo has no history
+    exchange: MIL
+    benchmark: "FTSEMIB.MI"
+  - club: Borussia Dortmund
+    league: D1
+    football_data_name: Dortmund
+    betfair_names: [Dortmund]
+    openfootball_names: [Borussia Dortmund]
+    oddsportal_names: [Dortmund]
+    oddsportal_id: nP1i5US1
+    wikipedia_name: "Borussia Dortmund"
+    ticker: BVB.DE
+    exchange: XETRA
+    benchmark: "^GDAXI"
+  - club: Ajax
+    league: N1
+    football_data_name: Ajax
+    betfair_names: [Ajax]
+    openfootball_names: [AFC Ajax]
+    oddsportal_names: [Ajax]
+    oddsportal_id: 8UOvIwnb
+    wikipedia_name: "AFC Ajax"
+    ticker: AJAX.AS
+    exchange: AMS
+    benchmark: "^AEX"
+  - club: Celtic
+    league: SC0
+    football_data_name: Celtic
+    betfair_names: [Celtic]
+    openfootball_names: [Celtic FC]
+    oddsportal_names: [Celtic]
+    oddsportal_id: QFKRRD8M
+    wikipedia_name: "Celtic F.C."
+    ticker: CCP.L
+    exchange: LSE
+    benchmark: "^FTAI"
+  - club: Benfica
+    league: P1
+    football_data_name: Benfica
+    betfair_names: [Benfica]
+    openfootball_names: [SL Benfica, Sport Lisboa e Benfica]
+    oddsportal_names: [Benfica]
+    oddsportal_id: zBkyuyRI
+    wikipedia_name: "S.L. Benfica"
+    ticker: SLBEN.LS
+    exchange: LIS
+    benchmark: "PSI20 Index"
+  - club: Porto
+    league: P1
+    football_data_name: Porto
+    betfair_names: [FC Porto, Porto]
+    openfootball_names: [FC Porto]
+    oddsportal_names: [FC Porto]
+    oddsportal_id: S2NmScGp
+    wikipedia_name: "FC Porto"
+    ticker: FCP.LS
+    exchange: LIS
+    benchmark: "PSI20 Index"
+  - club: Sporting CP
+    league: P1
+    football_data_name: Sp Lisbon
+    betfair_names: [Sporting Lisbon, Sporting CP]
+    openfootball_names: [Sporting CP, Sporting Clube de Portugal]
+    oddsportal_names: [Sporting CP]
+    oddsportal_id: tljXuHBC
+    wikipedia_name: "Sporting CP"
+    ticker: SCP.LS
+    exchange: LIS
+    benchmark: "PSI20 Index"
+  - club: Lyon
+    league: F1
+    football_data_name: Lyon
+    betfair_names: [Lyon]
+    openfootball_names: [Olympique Lyonnais]
+    oddsportal_names: [Lyon]
+    oddsportal_id: 2akflumR
+    wikipedia_name: "Olympique Lyonnais"
+    ticker: EFG.PA   # Eagle Football Group, formerly OL Groupe (OLG.PA): same company, Yahoo keeps the history under EFG.PA
+    exchange: PAR
+    benchmark: "^FCHI"
+  - club: Galatasaray
+    league: T1
+    football_data_name: Galatasaray
+    betfair_names: [Galatasaray]
+    openfootball_names: [Galatasaray, Galatasaray SK]
+    oddsportal_names: [Galatasaray]
+    oddsportal_id: riaqqurF
+    wikipedia_name: "Galatasaray S.K."
+    ticker: GSRAY.IS
+    exchange: IST
+    benchmark: "XU100.IS"
+  - club: Fenerbahce
+    league: T1
+    football_data_name: Fenerbahce
+    betfair_names: [Fenerbahce]
+    openfootball_names: [Fenerbahçe]
+    oddsportal_names: [Fenerbahce]
+    oddsportal_id: MsbmracL
+    wikipedia_name: "Fenerbahçe S.K."
+    ticker: FENER.IS
+    exchange: IST
+    benchmark: "XU100.IS"
+  - club: Besiktas
+    league: T1
+    football_data_name: Besiktas
+    betfair_names: [Besiktas]
+    openfootball_names: [Beşiktaş]
+    oddsportal_names: [Besiktas]
+    oddsportal_id: IDmErJCR
+    wikipedia_name: "Beşiktaş J.K."
+    ticker: BJKAS.IS
+    exchange: IST
+    benchmark: "XU100.IS"

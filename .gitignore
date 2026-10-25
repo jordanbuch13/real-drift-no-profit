@@ -1,0 +1,32 @@
+# Credentials: never commit
+.env
+.env.*
+!.env.example
+certs/
+*.pem
+*.crt
+*.key
+*.p12
+*.pfx
+
+# Data: downloaded or rebuilt by the pipeline (see data/README.md)
+data/*
+!data/README.md
+*.xlsx
+*.zip
+
+# Python, notebooks, editors
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

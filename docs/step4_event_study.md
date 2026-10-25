@@ -1,6 +1,6 @@
 # Step 4: Event Study and Strategy Backtest
 
-**Status:** implemented in `src/step4_event_study.py`, run on the real data 2026-10-09 (spec confirmed by Jordan 2026-10-09). Results below; changes made while running are under "Changes from the spec".
+**Status:** implemented in `src/step4_event_study.py`, run on the real data 2026-10-09 (spec confirmed 2026-10-09). Results below; changes made while running are under "Changes from the spec".
 
 ## Context
 
@@ -55,7 +55,7 @@ Clean matches only: no other match of the club with day 0 within 3 trading days 
 
 ### 5. Splits
 
-Decided with Jordan, 2026-10-08. Each split is the task 3 regression with the surprise terms interacted with the split.
+Decided 2026-10-08. Each split is the task 3 regression with the surprise terms interacted with the split.
 
 **Main (always reported, whatever they show):**
 
@@ -123,12 +123,12 @@ Output: `data/processed/backtest_trades.csv`, `backtest_daily.csv`, and the cumu
 
 ## Decisions
 
-Decided with Jordan, 2026-10-08:
+Decided, 2026-10-08:
 
 1. Main tests H1 (drift), H2 (good v bad news), H3 (competition type); backups E1 stakes, E2 form, E3 period; previous season's champion dropped; club table descriptive.
 2. Every backup run is reported as exploratory; a null main result is reported as a finding.
 
-Confirmed by Jordan, 2026-10-09:
+Confirmed, 2026-10-09:
 
 3. Drift window days +1 to +3 for the main test (median gap between matches), +5 and +10 reported.
 4. Abnormal returns: Dimson beta, no alpha.
@@ -201,7 +201,7 @@ The gross edge halves out-of-sample (long-short mean per trade +0.19% then +0.17
 
 Run 2026-10-09: `python -m src.league_tables` (download and tables), then `run_exploratory()`. Files: `league_stakes.csv` (every league match of a listed club: match number, points and rank before the match, gaps to the three lines, `late`, `stakes`), `league_places.csv`, `league_tables_wikipedia.csv`, `event_study_exploratory.csv`.
 
-**Definitions** (decided with Jordan 2026-10-09):
+**Definitions** (decided 2026-10-09):
 - Late: one of the club's last 10 scheduled league matches (38 in Scotland, 2 × (teams − 1) elsewhere; abandoned Covid seasons keep their schedule).
 - Lines: below 1st (title), below the last Champions League place (any round, qualifiers included; European Performance Spots not counted, they were known only late in the season), above the first relegation place (play-off places count). The Scottish split is ignored.
 - Within 6 points: a club on or above a line leads the team just below it by at most 6, or a club below trails the team on the place by at most 6. Clubs level on points give 0 either side, so tiebreak rules do not matter.
@@ -253,7 +253,7 @@ The written report. Further data (Bloomberg bid and ask for the other clubs) onl
 
 ## Match-week pattern
 
-Added 2026-10-09 after the H2 correction (Jordan: a finding for the report). `run_match_week()` in `src/step4_event_study.py`; outputs `match_week_coefficients.csv`, `match_week_tests.csv`, `match_week_windows.csv`, figure `match_week_pattern.png`. Not a pre-specified test: exploratory, reported as such.
+Added 2026-10-09 after the H2 correction (a finding for the report). `run_match_week()` in `src/step4_event_study.py`; outputs `match_week_coefficients.csv`, `match_week_tests.csv`, `match_week_windows.csv`, figure `match_week_pattern.png`. Not a pre-specified test: exploratory, reported as such.
 
 **Method.** Two measures:
 1. Regression of the abnormal return on an indicator of any match of the club at each lag -5 to +5, with the surprise at the same lags as a control. The coefficients are the abnormal return around a match whose result met expectations exactly (surprise 0), relative to days with no match within 5 trading days (intercept +0.045% a day).

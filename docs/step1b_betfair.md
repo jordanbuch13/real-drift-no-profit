@@ -10,7 +10,7 @@ Betfair's historical exchange data fills the gap. The BASIC plan is free and giv
 
 Code: `src/step1b_betfair.py`. Tested offline on synthetic Betfair files (`tests/test_pipeline.py`). Test month February 2016 run on real data 2026-10-06; findings in `docs/issues.md`.
 
-## Setup (done by Jordan, once)
+## Setup (done once)
 
 1. Create a Betfair account (UK).
 2. Get an application key through the Betfair Developer Program. The free delayed key is enough for historical data.

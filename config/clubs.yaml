@@ -168,7 +168,7 @@ friendly_filter:
     - {club: Celtic, reason: "Champions League and Europa League qualifiers start in July, before the Scottish season; openfootball only lists qualifiers from 2024/25"}
 
 # Domestic super cups: single competitive matches, usually just before the season, which the
-# off-season rule would otherwise drop. Dates supplied by Jordan (2026-10-06). A Betfair row is
+# off-season rule would otherwise drop. Dates added 2026-10-06. A Betfair row is
 # kept as a super cup only if the club plays in that league, the date matches exactly (London
 # date; a day's tolerance mislabelled January Coppa Italia ties), and the
 # opponent is a team the club also meets in the league. Known false positives go under exclude.
@@ -329,8 +329,8 @@ corporate_actions:
 # club is within `within_points` of the title line, the last Champions League place or the first
 # relegation place. Places per league and season come from the Wikipedia final tables
 # (data/raw/wikipedia_leagues/), ex ante: any Champions League round counts, relegation play-off
-# places count, European Performance Spots (known only late in the season) do not. Decided with
-# Jordan 2026-10-09; the Scottish split is ignored (places across the split line still count).
+# places count, European Performance Spots (known only late in the season) do not. Decided
+# 2026-10-09; the Scottish split is ignored (places across the split line still count).
 e1_stakes:
   last_rounds: 10
   within_points: 6

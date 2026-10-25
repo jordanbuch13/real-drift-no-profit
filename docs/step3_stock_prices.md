@@ -82,7 +82,7 @@ Code in `src/step3_prices.py`, entry point `build_match_events()`, notebook head
 
 ## Decisions
 
-Decided with Jordan, 2026-10-08:
+Decided, 2026-10-08:
 
 1. **Price source: Yahoo Finance**, via `yfinance` (free, unofficial; Yahoo's terms are for personal use), **plus Bloomberg** (Imperial library, pulled 2026-10-08) for what Yahoo lacks or gets wrong: Roma, the PSI 20, the Turkish corporate actions. A Bloomberg cross-check of the other clubs was not done; possible later.
 2. **Roma: in, from Bloomberg**, to its last trading day 12/09/2022 (delisted after the Friedkin takeover). Later matches have `listed = False`. Survivorship point for the report: the delisted club needed a licensed database.

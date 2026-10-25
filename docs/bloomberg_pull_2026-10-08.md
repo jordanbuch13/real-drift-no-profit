@@ -1,6 +1,6 @@
 # Bloomberg data pull, 8 October 2026
 
-Pulled by Jordan on an Imperial Abdus Salam Library terminal. The exported workbook is `data/raw/bloomberg/matchday_alpha_bloomberg.xlsx` and is **not committed** to git (`data/raw/` is ignored). Imperial's Bloomberg licence says exported data should stay on the terminal; Jordan confirmed on 2026-10-13 that the export can be included in the capstone submission's data snapshot.
+Exported from a Bloomberg terminal. The workbook is `data/raw/bloomberg/matchday_alpha_bloomberg.xlsx` and is not committed (`data/raw/` is ignored).
 
 ## What was pulled
 

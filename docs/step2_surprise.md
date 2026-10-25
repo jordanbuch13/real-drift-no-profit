@@ -68,7 +68,7 @@ Step 4 needs to say which matches count as good news and bad news. Options:
 2. **Fixed cutoff:** good news if `surprise >= c`, bad news if `surprise <= -c`, the rest neutral. With `c = 0.5` about 48% of rows are neutral. The cutoff is arbitrary and must be chosen before looking at returns.
 3. **Terciles:** split into thirds by surprise. On the current data the cutoffs are about -0.16 and +0.43. Equal sized groups give the event study the same power in each, and it is the common choice in the event study literature.
 
-**Decision (Jordan, 2026-10-07): terciles** as the main buckets, sign as a robustness check. For the event study (Step 4), terciles are computed over the full sample. For the backtest, full sample cutoffs are look-ahead (a 2015 trade would use cutoffs from 2026 results), so Step 4 must compute them from earlier seasons only. Step 2 stores `surprise_sign` and the full sample `surprise_tercile` (`low`, `mid`, `high`), and prints the cutoffs.
+**Decision (2026-10-07): terciles** as the main buckets, sign as a robustness check. For the event study (Step 4), terciles are computed over the full sample. For the backtest, full sample cutoffs are look-ahead (a 2015 trade would use cutoffs from 2026 results), so Step 4 must compute them from earlier seasons only. Step 2 stores `surprise_sign` and the full sample `surprise_tercile` (`low`, `mid`, `high`), and prints the cutoffs.
 
 ### 5. Fixture congestion
 
